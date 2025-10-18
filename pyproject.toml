@@ -1,0 +1,20 @@
+[project]
+name = "spikenet2"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lightning==2.4.0",
+    "mat73==0.63",
+    "matplotlib==3.7.5",
+    "numpy==1.24.4",
+    "pandas==2.0.3",
+    "pytorch-lightning==2.2.1",
+    "scikit-learn==1.3.2",
+    "scipy==1.14.1",
+    "torch==2.2.2",
+    "torchvision==0.17.2",
+    "tqdm==4.66.4",
+    "wandb==0.16.5",
+]
