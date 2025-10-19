@@ -30,7 +30,7 @@ path_model = 'Models/spikenet2/'
 
 # set up dataloader to predict all samples in test dataset
 transform_train = transforms.Compose([extremes_remover(signal_max = 2000, signal_min = 20)])
-con_combine_montage = con_ECG_combine_montage()
+montage = con_combine_montage()
 
 
 # load pretrained model
@@ -50,7 +50,7 @@ i = 0
 #controls = controls[controls['Mode']=='Test']
 for eeg_file in tqdm(controls.EEG_index):
     path = '/shared/public/datasets/spikenet2/EEG/hm_negative_eeg/'+eeg_file+'.mat'
-    Bonobo_con = ContinousToSnippetDataset(path,montage=con_combine_montage,transform=transform_train,window_size=config.WINDOWSIZE)
+    Bonobo_con = ContinousToSnippetDataset(path,montage=montage,transform=transform_train,window_size=config.WINDOWSIZE)
     con_dataloader = DataLoader(Bonobo_con, batch_size=128,shuffle=False,num_workers=os.cpu_count())
     
     preds = trainer.predict(model,con_dataloader)
