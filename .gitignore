@@ -6,6 +6,7 @@ input/
 
 # ログファイルを除外
 logging/
+lightning_logs/
 
 # モデルのチェックポイントを除外
 Models/
