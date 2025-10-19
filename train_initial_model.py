@@ -21,7 +21,7 @@ from sleeplib.config import Config
 import pickle
 
 # define model name and path
-model_path = 'your_path/Models/spikenet2'
+model_path = './Models/spikenet2'
 # load config and show all default parameters
 config = Config()
 config.print_config()
@@ -69,7 +69,7 @@ model = ResNet(lr=config.LR,
                )
 
 # create a logger
-wandb.init(dir='logging')
+wandb.init(dir='./logging/wandb')
 wandb_logger = WandbLogger(project='super_awesome_project') 
 
 # create callbacks with early stopping and model checkpoint (saves the best model)
