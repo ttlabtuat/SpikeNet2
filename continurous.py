@@ -26,7 +26,7 @@ from sleeplib.montages import CDAC_bipolar_montage,CDAC_common_average_montage,C
 from sleeplib.transforms import cut_and_jitter, channel_flip,extremes_remover
 # load config and show all default parameters
 config = Config()
-path_model = 'your_path/Models/spikenet2/'
+path_model = 'Models/spikenet2/'
 
 # set up dataloader to predict all samples in test dataset
 transform_train = transforms.Compose([extremes_remover(signal_max = 2000, signal_min = 20)])
@@ -34,7 +34,7 @@ con_combine_montage = con_ECG_combine_montage()
 
 
 # load pretrained model
-model = ResNet.load_from_checkpoint('your_path/Models/spikenet2/hardmine.ckpt',
+model = ResNet.load_from_checkpoint('Models/spikenet2/hardmine.ckpt',
                                         lr=config.LR,
                                         n_channels=37,
                                        )
@@ -43,13 +43,13 @@ model = ResNet.load_from_checkpoint('your_path/Models/spikenet2/hardmine.ckpt',
 trainer = pl.Trainer(fast_dev_run=False,enable_progress_bar=False,devices = 1,strategy ='ddp')
 
 # store results
-path_controls = os.path.join("your_path/Models/spikenet2/controlset.csv")
+path_controls = os.path.join("Models/spikenet2/controlset.csv")
 
 controls = pd.read_csv(path_controls)
 i = 0
 #controls = controls[controls['Mode']=='Test']
 for eeg_file in tqdm(controls.EEG_index):
-    path = 'your_path/continuousEEG/'+eeg_file+'.mat'
+    path = '/shared/public/datasets/spikenet2/EEG/hm_negative_eeg/'+eeg_file+'.mat'
     Bonobo_con = ContinousToSnippetDataset(path,montage=con_combine_montage,transform=transform_train,window_size=config.WINDOWSIZE)
     con_dataloader = DataLoader(Bonobo_con, batch_size=128,shuffle=False,num_workers=os.cpu_count())
     
