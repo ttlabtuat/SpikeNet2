@@ -73,7 +73,7 @@ wandb.init(dir='./logging/wandb')
 wandb_logger = WandbLogger(project='super_awesome_project') 
 
 # create callbacks with early stopping and model checkpoint (saves the best model)
-callbacks = [EarlyStopping(monitor='val_loss',patience=5),ModelCheckpoint(dirpath=model_path,filename='weights',monitor='val_loss')]
+callbacks = [EarlyStopping(monitor='val_loss',patience=5),ModelCheckpoint(dirpath=model_path,filename='hardmine',monitor='val_loss')]
 # create trainer, use fast dev run to test the code
 trainer = pl.Trainer(devices=1, accelerator="gpu", min_epochs=30,max_epochs=100,logger=wandb_logger,callbacks=callbacks,fast_dev_run=False)
 # train the model
